@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Home from "../routes/Home";
-import Auth from "../routes/Auth";
-import Profile from "../routes/Profile";
+import Home from "routes/Home";
+import Auth from "routes/Auth";
+import Profile from "routes/Profile";
+import Navigation from "components/Navigation";
 
-const AppRouter = () => {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+const AppRouter = ({ isLoggedIn }) => {
     return (
         <BrowserRouter>
+            {isLoggedIn && <Navigation />}
             <Routes>
                 {isLoggedIn ? (
                     <>
