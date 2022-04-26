@@ -1,0 +1,26 @@
+.socialBox {
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.socialBox .googleBtn {
+    background-color: #feec34;
+    border-color: #feec34;
+    height: 40px;
+    box-sizing: border-box;
+    margin-right: 10px;
+    border-radius: 3px;
+}
+
+.socialBox .githubBtn {
+    background-color: #000;
+    border-color: #000;
+    color: #fff;
+    height: 40px;
+    box-sizing: border-box;
+    border-radius: 3px;
+}

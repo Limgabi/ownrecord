@@ -35,7 +35,10 @@ function App() {
     });
   }
   return (
-    <>
+    <div style={{
+      margin: "0 auto",
+      textAlign: "center"
+    }}>
       {init ?
         <AppRouter 
           refreshUser={refreshUser}
@@ -44,7 +47,7 @@ function App() {
         />
         : "Initializing..."}
       <footer>&copy; {new Date().getFullYear()} Own Record </footer>
-    </>
+    </div>
   );
 }
 
