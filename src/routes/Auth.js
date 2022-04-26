@@ -28,17 +28,22 @@ const Auth = () => {
 
     return (
         <div style={{
-            margin: "10rem auto",
+            margin: "6rem auto",
             textAlign: "center",
         }}>
+            <h1>Own Record</h1>
             <AuthForm />
             <div className="socialBox">
                 <button name="google" className="googleBtn" onClick={onSocialClick}>
-                    <FcGoogle/>
+                    <FcGoogle style={{
+                        marginRight: "8px",
+                    }}/>
                     Continue with Google
                 </button>
                 <button name="github" className="githubBtn" onClick={onSocialClick}>
-                    <BsGithub/>
+                    <BsGithub style={{
+                        marginRight: "8px",
+                    }}/>
                     Continue with Github
                 </button>
             </div>

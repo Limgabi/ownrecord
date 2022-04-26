@@ -95,7 +95,7 @@ const AuthForm = () => {
                     {error}
                 </Form>
                 <br/>
-                <div className="d-grid gap-1">
+                <div>
                     <Card onClick={toggleAccount}>
                         <Card.Body>{newAccount ? "Sign In" : "Create Account"}</Card.Body>
                     </Card>
