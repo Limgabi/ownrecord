@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import AppRouter from 'components/AppRouter';
 import { authService } from "fbase";
-import { onAuthStateChanged } from "firebase/auth"
+import { onAuthStateChanged, updateProfile } from "firebase/auth"
 
 function App() {
   const [init, setInit] = useState(false);;
@@ -10,7 +10,15 @@ function App() {
   useEffect(() => {
     onAuthStateChanged(authService, (user) => {
       if (user) {
-        setUserObj(user);
+        setUserObj({
+          displayName: user.displayName,
+          uid: user.uid,
+          updateProfile: (args) => updateProfile(user, { displayName: user.displayName }),
+        });
+        if(user.displayName === null) {
+          const name = user.email.split("@")[0];
+          user.displayName = name;
+        }   
       } else {
         setUserObj(null);
       }
@@ -18,9 +26,23 @@ function App() {
     })
   }, [])
 
+  const refreshUser = () => {
+    const user = authService.currentUser;
+    setUserObj({
+      displayName: user.displayName,
+      uid: user.uid,
+      updateProfile: (args) => updateProfile(user, {displayName: user.displayName}),
+    });
+  }
   return (
     <>
-      {init ? <AppRouter isLoggedIn={Boolean(userObj)} userObj={userObj}/> : "Initializing..."}
+      {init ?
+        <AppRouter 
+          refreshUser={refreshUser}
+          isLoggedIn={Boolean(userObj)} 
+          userObj={userObj} 
+        />
+        : "Initializing..."}
       <footer>&copy; {new Date().getFullYear()} Own Record </footer>
     </>
   );

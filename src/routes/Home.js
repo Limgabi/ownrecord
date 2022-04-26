@@ -53,6 +53,7 @@ const Home = ({ userObj }) => {
         setAttachment("");
         
     };
+
     const onFileChange = (e) => {
         const {
             target: { files }
