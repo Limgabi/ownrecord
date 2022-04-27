@@ -27,10 +27,7 @@ const Auth = () => {
     }
 
     return (
-        <div style={{
-            margin: "6rem auto",
-            textAlign: "center",
-        }}>
+        <div>
             <h1>Own Record</h1>
             <AuthForm />
             <div className="socialBox">

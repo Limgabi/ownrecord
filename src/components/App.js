@@ -36,8 +36,12 @@ function App() {
   }
   return (
     <div style={{
-      margin: "0 auto",
-      textAlign: "center"
+      display: "flex",
+      flexDirection: "column",
+      textAlign: "center",
+      alignItems: "center",
+      justifyContent: "center",
+      margin: "6rem auto",
     }}>
       {init ?
         <AppRouter 

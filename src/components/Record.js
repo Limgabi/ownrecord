@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { dbService, storageService } from "fbase";
 import { doc, deleteDoc, updateDoc } from "firebase/firestore";
 import { ref, deleteObject } from "firebase/storage";
+import Card from "react-bootstrap/Card";
 
 const Record = ({ recordObj, isOwner }) => {
     const RecordTextRef = doc(dbService, "records", `${recordObj.id}`);
@@ -54,16 +55,24 @@ const Record = ({ recordObj, isOwner }) => {
                 </>
             ) : (
                 <>
-                    <h4>{recordObj.text}</h4>
-                    {recordObj.attachmentUrl && (
-                        <img src={recordObj.attachmentUrl} width="50px" height="50px"/>
-                    )}
-                    {isOwner && (
-                        <>
-                            <button onClick={onDeleteClick}>Delete Record</button>
-                            <button onClick={toggleEditing}>Edit Record</button>
-                        </>
-                    )}
+                    <Card border="secondary" style={{ width: "500px"}}>
+                        <Card.Header>글 쓴 사람</Card.Header>
+                        <Card.Body>
+                        <Card.Title>{recordObj.text}</Card.Title>
+                        {recordObj.attachmentUrl && (
+                            <img src={recordObj.attachmentUrl} width="50px" height="50px" />
+                        )}
+                        <Card.Text>{recordObj.text}</Card.Text>   
+                        {isOwner && (
+                            <>
+                                <button onClick={onDeleteClick}>Delete Record</button>
+                                <button onClick={toggleEditing}>Edit Record</button>
+                            </>
+                        )}
+                    </Card.Body>
+                    </Card>
+                    
+
                 </>
             )}
         </div>

@@ -14,7 +14,7 @@ import Card from 'react-bootstrap/Card';
 const AuthForm = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [newAccount, setNewAccount] = useState(true);
+    const [newAccount, setNewAccount] = useState(false);
     const [error, setError] = useState("");
 
     const onChange = (e) => {
@@ -70,40 +70,21 @@ const AuthForm = () => {
                                 required />
                         </Col>
                     </Form.Group>
-                    {/* <input
-                        name="email"
-                        type="email"
-                        placeholder="Email"
-                        value={email}
-                        onChange={onChange}
-                        required
-                    /> */}
-                    {/* <input
-                        name="password"
-                        type="password"
-                        placeholder="Password"
-                        value={password}
-                        onChange={onChange}
-                        required
-                    /> */}
                     <div className="d-grid gap-1">
                         <Button variant="secondary" type="submit" >
                             {newAccount ? "Create Account" : "Sign In"}
                         </Button>
                     </div>
-                    {/* <input type="submit" value={newAccount ? "Create Account" : "Sign In"} /> */}
                     {error}
                 </Form>
                 <br/>
-                <div>
+                <div className="d-grid gap-1">
                     <Card onClick={toggleAccount}>
                         <Card.Body>{newAccount ? "Sign In" : "Create Account"}</Card.Body>
                     </Card>
                 </div>
                 <br/>
             </Container>
-
-            {/* <span onClick={toggleAccount}>{newAccount ? "Sign In" : "Create Account"}</span> */}
         </>
     )
 }
