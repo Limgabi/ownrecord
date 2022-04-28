@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { dbService, storageService } from "fbase";
 import { doc, deleteDoc, updateDoc } from "firebase/firestore";
 import { ref, deleteObject } from "firebase/storage";
@@ -8,6 +9,8 @@ import { MdDelete } from "react-icons/md";
 import { BiEdit } from "react-icons/bi";
 
 const Record = ({ recordObj, isOwner }) => {
+    const navigate = useNavigate();
+    
     const [editing, setEditing] = useState(false);
     const [newRecord, setNewRecord] = useState(recordObj.text);
     const RecordTextRef = doc(dbService, "records", `${recordObj.id}`);
@@ -37,6 +40,9 @@ const Record = ({ recordObj, isOwner }) => {
             target: { value }
         } = e;
         setNewRecord(value);
+    }
+    const onClickUser = () => {
+        navigate(`/user/${recordObj.creatorId}`);
     }
     return (
         <div>
@@ -82,7 +88,7 @@ const Record = ({ recordObj, isOwner }) => {
                         >
                             <FaUserCircle size="30" />
                             <div className="ms-3 me-auto d-inline-block p1">
-                                <div className="fw-bold">{recordObj.creatorName}</div>
+                                <div className="fw-bold" onClick={onClickUser}>{recordObj.creatorName}</div>
                                 {/* <p>@{recordObj.creatorName}</p> */}
                                 <p>{recordObj.text}</p>
                                 {recordObj.attachmentUrl && (

@@ -19,7 +19,7 @@ const Search = ({ userObj }) => {
                 id: doc.id,
                 ...doc.data(),
             }));
-            console.log(searchArr)
+            // console.log(searchArr)
             setSearchs(searchArr);
         });
     }, []);
