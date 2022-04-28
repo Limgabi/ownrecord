@@ -80,6 +80,7 @@ const RecordFactory = ({ userObj }) => {
                 </div>
             )}
         </form>
+        
     )
 }
 
