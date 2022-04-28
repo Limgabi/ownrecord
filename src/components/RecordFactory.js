@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { dbService, storageService } from "fbase";
-import { collection, addDoc, getDocs, query, onSnapshot, orderBy } from "firebase/firestore";
+import { collection, addDoc } from "firebase/firestore";
 import { ref, uploadString, getDownloadURL } from "firebase/storage";
 
 const RecordFactory = ({ userObj }) => {
@@ -9,17 +9,11 @@ const RecordFactory = ({ userObj }) => {
     const [attachment, setAttachment] = useState("");
     const fileInput = useRef();
 
-    const onChange = (e) => {
-        const {
-            target: { value }
-        } = e;
-        setRecord(value);
-    }
     const onSubmit = async (e) => {
         e.preventDefault();
-        let attachmentUrl;
+        let attachmentUrl = "";
 
-        if (attachmentUrl !== "") {
+        if (attachment !== "") {
             const fileRef = ref(storageService, `${userObj.uid}/${uuidv4()}`);
             const uploadFile = await uploadString(fileRef, attachment, "data_url");
             console.log(uploadFile);
@@ -31,7 +25,8 @@ const RecordFactory = ({ userObj }) => {
             text: record,
             createdAt: Date.now(),
             creatorId: userObj.uid,
-            attachmentUrl
+            attachmentUrl,
+            creatorName: userObj.displayName
         };
 
         await addDoc(collection(dbService, "records"), recordObj);
@@ -39,6 +34,13 @@ const RecordFactory = ({ userObj }) => {
         setAttachment("");
 
     };
+
+    const onChange = (e) => {
+        const {
+            target: { value }
+        } = e;
+        setRecord(value);
+    }
 
     const onFileChange = (e) => {
         const {
@@ -54,10 +56,12 @@ const RecordFactory = ({ userObj }) => {
         }
         reader.readAsDataURL(theFile);
     }
+
     const onClearAttachment = () => {
         setAttachment("");
         fileInput.current.value = "";
     }
+
     return (
         <form onSubmit={onSubmit}>
             <input
