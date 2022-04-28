@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useLocation, useNavigate, useParams } from "react-router";
+import { useParams } from "react-router";
 import { dbService } from "fbase";
 import { collection, query, onSnapshot, where } from "firebase/firestore";
+import Record from "components/Record";
 
-const Search = () => {
-    let {searchWord} = useParams();
+const Search = ({ userObj }) => {
+    let { searchWord } = useParams();
     const [searchs, setSearchs] = useState([]);
 
     useEffect(() => {
@@ -26,15 +27,15 @@ const Search = () => {
     return (
         <div>
             {
-                searchs.map((search , idx) => (
-                    <div key={idx}>
-                        <h4>{search.text}</h4>
-                        {search.attachmentUrl && <img src={search.attachmentUrl} width="50px" height="50px"/>}
-                    </div>
-                    
+                searchs.map((search) => (
+                    <Record
+                        key={search.id}
+                        recordObj={search}
+                        isOwner={search.creatorId === userObj.uid}
+                    />
                 ))
             }
-            </div> 
+        </div>
     )
 }
 

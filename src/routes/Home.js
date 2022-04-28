@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { dbService } from "fbase";
 import { collection, query, onSnapshot, where } from "firebase/firestore";
 import Record from "components/Record";
@@ -12,7 +12,6 @@ const Home = ({ userObj }) => {
     const [records, setRecords] = useState([]);
     const [recording, setRecording] = useState(false);
     const [search, setSearch] = useState("");
-    const [searchs, setSearchs] = useState([]);
 
     useEffect(() => {
         // const q = query(collection(dbService, "records"), orderBy("createdAt", "desc"));
