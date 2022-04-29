@@ -6,6 +6,7 @@ import Profile from "routes/Profile";
 import Navigation from "components/Navigation";
 import Search from "routes/Search";
 import UserProfile from "routes/UserProfile";
+import Recording from "routes/Recording";
 
 const AppRouter = ({ refreshUser, isLoggedIn, userObj }) => {
     return (
@@ -18,6 +19,7 @@ const AppRouter = ({ refreshUser, isLoggedIn, userObj }) => {
                         <Route path="/profile" element={<Profile userObj={userObj} refreshUser={refreshUser}/>} />
                         <Route path="/user/:userid" element={<UserProfile userObj={userObj}/>} />
                         <Route path="/search/:searchWord" element={<Search userObj={userObj}/>} />
+                        <Route path="/recording" element={<Recording userObj={userObj}/>} />
                     </>
                 ) : (
                     <Route path="/" element={<Auth />} />

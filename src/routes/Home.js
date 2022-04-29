@@ -25,10 +25,6 @@ const Home = ({ userObj }) => {
         });
     }, []);
 
-    const toggleRecording = () => {
-        setRecording((prev) => !prev);
-    }
-
     const onChange = (e) => {
         const {
             target: { value }
@@ -41,16 +37,20 @@ const Home = ({ userObj }) => {
         navigate(`/search/${search}`);
     }
 
+    const onClickRecording = () => {
+        navigate('/recording');
+    }
+
     return (
         <div>
-            <input type="text" value={search} onChange={onChange} />
-           <Button onClick={onClickSearch}>검색</Button>
+            <Button variant="secondary" onClick={onClickRecording}>Recording</Button>
 
-            <RecordFactory userObj={userObj} />
-            {/* <Button onClick={toggleRecording}>Recording</Button>
-            {
-                recording && <RecordFactory userObj={userObj}/>
-            } */}
+            <div>
+                <input type="text" value={search} onChange={onChange} />
+                <Button onClick={onClickSearch}>검색</Button>
+            </div>
+
+            {/* <RecordFactory userObj={userObj} /> */}
             <div>
                 {
                     records.map((record) => (
