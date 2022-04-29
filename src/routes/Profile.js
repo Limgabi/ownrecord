@@ -4,7 +4,7 @@ import { authService, dbService } from "fbase";
 import { signOut, updateProfile } from "firebase/auth";
 import { onSnapshot, collection, getDocs, query, where, orderBy } from "firebase/firestore";
 import { Form, Row, Col, Container, Card, InputGroup, Button } from "react-bootstrap";
-import MyRecord from "components/MyRecord";
+import Record from "components/Record";
 
 const Profile = ({ userObj, refreshUser }) => {
     const navigate = useNavigate();
@@ -71,10 +71,15 @@ const Profile = ({ userObj, refreshUser }) => {
             </Container>
             {
                 myRecords.map((record) => (
-                    <MyRecord
-                        key={record.id}
-                        recordObj={record}
+                    <Record
+                            key={record.id}
+                            recordObj={record}
+                            isOwner={record.creatorId === userObj.uid}
                     />
+                    // <MyRecord
+                    //     key={record.id}
+                    //     recordObj={record}
+                    // />
                 ))
             }
             <div style={{ display: "flex", justifyContent: "center" }}>
