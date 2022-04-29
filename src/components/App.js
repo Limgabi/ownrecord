@@ -35,13 +35,16 @@ function App() {
     });
   }
   return (
+    // <div style={{
+    //   display: "flex",
+    //   flexDirection: "column",
+    //   textAlign: "center",
+    //   alignItems: "center",
+    //   justifyContent: "center",
+    //   margin: "6rem auto",
+    // }}>
     <div style={{
-      display: "flex",
-      flexDirection: "column",
       textAlign: "center",
-      alignItems: "center",
-      justifyContent: "center",
-      margin: "6rem auto",
     }}>
       {init ?
         <AppRouter 
