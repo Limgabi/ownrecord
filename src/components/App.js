@@ -15,10 +15,10 @@ function App() {
           uid: user.uid,
           updateProfile: (args) => updateProfile(user, { displayName: user.displayName }),
         });
-        if(user.displayName === null) {
+        if (user.displayName === null) {
           const name = user.email.split("@")[0];
           user.displayName = name;
-        }   
+        }
       } else {
         setUserObj(null);
       }
@@ -31,7 +31,7 @@ function App() {
     setUserObj({
       displayName: user.displayName,
       uid: user.uid,
-      updateProfile: (args) => updateProfile(user, {displayName: user.displayName}),
+      updateProfile: (args) => updateProfile(user, { displayName: user.displayName }),
     });
   }
   return (
@@ -42,15 +42,17 @@ function App() {
     //   alignItems: "center",
     //   justifyContent: "center",
     //   margin: "6rem auto",
-    // }}>
+    //   }}>
     <div style={{
+      width: "60%",
       textAlign: "center",
+      margin: "16px auto"
     }}>
       {init ?
-        <AppRouter 
+        <AppRouter
           refreshUser={refreshUser}
-          isLoggedIn={Boolean(userObj)} 
-          userObj={userObj} 
+          isLoggedIn={Boolean(userObj)}
+          userObj={userObj}
         />
         : "Initializing..."}
       <footer>&copy; {new Date().getFullYear()} Own Record </footer>

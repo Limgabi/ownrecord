@@ -3,14 +3,14 @@ import { useNavigate } from "react-router-dom";
 import { dbService, storageService } from "fbase";
 import { doc, deleteDoc, updateDoc } from "firebase/firestore";
 import { ref, deleteObject } from "firebase/storage";
-import { ListGroup, Button } from "react-bootstrap";
+import { ListGroup, Button, Form, FormControl, InputGroup } from "react-bootstrap";
 import { FaUserCircle } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { BiEdit } from "react-icons/bi";
 
 const Record = ({ recordObj, isOwner }) => {
     const navigate = useNavigate();
-    
+
     const [editing, setEditing] = useState(false);
     const [newRecord, setNewRecord] = useState(recordObj.text);
     const RecordTextRef = doc(dbService, "records", `${recordObj.id}`);
@@ -45,43 +45,39 @@ const Record = ({ recordObj, isOwner }) => {
         navigate(`/user/${recordObj.creatorId}`);
     }
     return (
-        <div>
+        <div style={{
+            display: "flex",
+            flexDirection: "column",
+            width: "80%",
+            margin: "16px auto"
+            // textAlign: "center",
+            // alignItems: "center",
+            // justifyContent: "center",
+        }}>
             {editing ? (
                 <>
                     {isOwner && (
                         <>
-                            <form onSubmit={onSubmit}>
-                                <input
-                                    type="text"
-                                    placeholder="Edit your record"
-                                    value={newRecord}
-                                    required
-                                    onChange={onChange}
-                                />
-                                <input type="submit" value="Update Record" />
-                            </form>
-                            <button onClick={toggleEditing}>Cancel</button>
+                            <Form onSubmit={onSubmit}>
+                                <InputGroup className="mb-3">
+                                    <FormControl
+                                        type="text"
+                                        placeholder="Edit your record"
+                                        value={newRecord}
+                                        required
+                                        onChange={onChange}
+                                    />
+                                    <Button type="submit" variant="outline-secondary" id="button-addon2">
+                                        Update Record
+                                    </Button>
+                                </InputGroup>
+                            </Form>
+                            <Button onClick={toggleEditing} variant="secondary">Cancel</Button>
                         </>
                     )}
                 </>
             ) : (
                 <>
-                    {/* <Card border="secondary" style={{ width: "500px" }}>
-                        <Card.Header>{recordObj.creatorName}</Card.Header>
-                        <Card.Body>
-                            <Card.Title>{recordObj.text}</Card.Title>
-                            {recordObj.attachmentUrl && (
-                                <img src={recordObj.attachmentUrl} width="50px" height="50px" />
-                            )}
-                            <Card.Text>{recordObj.text}</Card.Text>
-                            {isOwner && (
-                                <>
-                                    <button onClick={onDeleteClick}>Delete Record</button>
-                                    <button onClick={toggleEditing}>Edit Record</button>
-                                </>
-                            )}
-                        </Card.Body>
-                    </Card> */}
                     <ListGroup>
                         <ListGroup.Item
                             className="d-flex justify-content-between align-items-start"
@@ -95,7 +91,7 @@ const Record = ({ recordObj, isOwner }) => {
                                     <img src={recordObj.attachmentUrl} width="100px" height="100px" />
                                 )}
                             </div>
-        
+
                             {isOwner && (
                                 <>
                                     <Button onClick={onDeleteClick} variant="light" size="sm"><MdDelete /></Button>

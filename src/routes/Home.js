@@ -43,14 +43,12 @@ const Home = ({ userObj }) => {
 
     return (
         <div>
+            <h1>Own Record</h1>
             <Button variant="secondary" onClick={onClickRecording}>Recording</Button>
-
             <div>
                 <input type="text" value={search} onChange={onChange} />
                 <Button onClick={onClickSearch}>검색</Button>
             </div>
-
-            {/* <RecordFactory userObj={userObj} /> */}
             <div>
                 {
                     records.map((record) => (
