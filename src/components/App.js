@@ -4,7 +4,7 @@ import { authService } from "fbase";
 import { onAuthStateChanged, updateProfile } from "firebase/auth"
 
 function App() {
-  const [init, setInit] = useState(false);;
+  const [init, setInit] = useState(false);
   const [userObj, setUserObj] = useState(null);
 
   useEffect(() => {
